@@ -4,6 +4,7 @@
 
 |구분| 파일 이름|설명|담당자|
 |--|--|--|--|
+|0|[questionnaires_main.py](docs/questionnaires_main.py)|메인 ||
 |1|[question_setting.py](docs/question_setting.py)|문제 입력|노주현|
 |2| [question_outputs.py](docs/question_outputs.py)|시험 응시|김유진|
 |3| [question_ouuser_scoringtputs.py](docs/user_scoring.py) |응시자별 채점 결과|노주현|
