@@ -1,6 +1,0 @@
-번호,유저 이름,1번 문제 답,2번 문제 답,3번 문제 답,4번 문제 답,5번 문제 답,점수
-1,김유진,Python,Matplotlib,MySQL,데이터 전처리,채택,100
-2,노주현,R,TensorFlow,MongoDB,데이터 전처리,채택,40
-3,문석천,Python,Scikit-learn,PostgreSQL,데이터 전처리,수정,45
-4,김하늘,C#,Matplotlib,MySQL,데이터 전처리,강화,55
-5,조유경,Python,Matplotlib,Oracle ,데이터 전처리,채택,80
