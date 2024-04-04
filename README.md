@@ -1,22 +1,3 @@
-## python_mysql
-#### Main package
-- java:17
-- mysql:8
-
-#### CLI with Dockerfile and compose.xml : duration 150.4s
-```
-# --project-name is docker container name
-~$ docker-compose --project-name python_mysql up -d --build
-```
-#### samples
-- [samples/python_mysql.py](./samples/python_mysql.py)
-
-#### database infors
-+ user='cocolabhub',
-+ password='cocolabhub',
-+ db='python_mysql'
-
-
 
 ### 역할분담
 ###  문제 입력
@@ -71,3 +52,23 @@
     1. DB에서 응시자 이름과 응시자들의 문제별 점수 가져오기
     2. 응시자별 채점 결과 출력
     3. 전체 응시자의 평균 출력
+
+## python_mysql
+#### Main package
+- java:17
+- mysql:8
+
+#### CLI with Dockerfile and compose.xml : duration 150.4s
+```
+# --project-name is docker container name
+~$ docker-compose --project-name python_mysql up -d --build
+```
+#### samples
+- [samples/python_mysql.py](./samples/python_mysql.py)
+
+#### database infors
++ user='cocolabhub',
++ password='cocolabhub',
++ db='python_mysql'
+
+
