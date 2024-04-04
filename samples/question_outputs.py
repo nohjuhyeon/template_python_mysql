@@ -1,21 +1,77 @@
-import pymysql
 
 # 데이터베이스 연결 설정
-conn = pymysql.connect(
+
+def question_outputs():
+    import pymysql
+    conn = pymysql.connect(
     host='python_mysql_mysql',  # 컨테이너 이름 또는 IP
     user='cocolabhub',
     password='cocolabhub',
     db='python_mysql',  # 데이터베이스 이름
     charset='utf8mb4'
-)
+    )
+    try:
+        with conn.cursor() as cursor:
+            while True:
+                sql = "SELECT USER_ID FROM USER_INFO_TABLE"
+                cursor.execute(sql)
+                user_data = cursor.fetchall()
+                user_name = input("응시자 이름 : ")
+                user_id = "USER_ID_{}".format(len(user_data)+1)
+                sql = "INSERT INTO USER_INFO_TABLE (USER_ID,USER_NAME) VALUES (%s, %s)"
+                cursor.execute(sql, (user_id,user_name))
+                conn.commit()
+                sql = "SELECT * FROM QUESTION_TABLE"
+                cursor.execute(sql)
+                question_data = cursor.fetchall()
 
-# 문제, 답항 프린트
-try:
-    with conn.cursor() as cursor:
-        
-    question_id = "QUESTION_ID_{}".format(i+1)
-    sql = "INSERT INTO QUESTION_TABLE(QUESTEION_ID,QUESTION) VALUES (%s, %s)"
-    cursor.execute(sql, (question_id, question))
-    conn.commit()
-# 사용자의 답 입력
-# 사용자가 입력한 답안지 리스트 출력
+                user_pick_list = []
+                for i in range(len(question_data)):
+                    print("문제 {} : {}".format(i+1,question_data[i][1]))  # 각 행 출력
+                    sql = "SELECT * FROM CHOICE_ANSWER_TABLE WHERE QUESTION_ID = %s"
+                    cursor.execute(sql,question_data[i][0])
+                    choice_data = cursor.fetchall()
+                    choice_dict = {}
+                    for j in range(len(choice_data)):
+                        choice_dict[choice_data[j][4]] = choice_data[j][3]
+
+                    for j in range(len(choice_dict)):
+                        print("{}. {}".format(j+1,choice_dict[str(j+1)]))
+                    while True:
+                        try:
+                            user_pick = int(input("답 : "))
+                            if user_pick <= len(choice_data):
+                                break
+                            else:
+                                print("*** 숫자 {} 이하로 입력해주세요! ***".format(len(choice_data)))
+                        except:
+                            print("*** 숫자만 입력해주세요! ***")
+                    user_pick_list.append(user_pick)
+                    sql = "SELECT * FROM CHOICE_ANSWER_TABLE WHERE QUESTION_ID = %s AND CHOICE_NUMBER = %s"
+                    cursor.execute(sql,(question_data[i][0],user_pick))
+                    user_pick_data = cursor.fetchall()
+                    user_choice_id = user_pick_data[0][0]
+                    sql = "SELECT USER_ID FROM USER_ANSWER_TABLE"
+                    cursor.execute(sql)
+                    user_answer_data = cursor.fetchall()
+                    user_answer_id = "USER_ANSWER_ID_{}".format(len(user_answer_data)+1)
+                    sql = "INSERT INTO USER_ANSWER_TABLE (USER_ANSWER_ID, USER_ID,CHOICE_ID) VALUES (%s, %s, %s)"
+                    cursor.execute(sql, (user_answer_id, user_id,user_choice_id))
+                    conn.commit()
+                    print("----------------------------")
+                print("***** 시험이 종료되었습니다! *****")
+                print("{} 님이 푼 답안지".format(user_name))
+                for i in range(len(user_pick_list)):
+                    print("{}번 문제 답 : {}".format(i+1, user_pick_list[i]))
+                while True:
+                    continue_check = input("다음 응시자가 있나요? (계속 : c, 종료 : x) : ").lower()
+                    if continue_check not in ['c','x']:
+                        print('*** "c"나 "x"를 입력해주세요! ***')
+                        pass
+                    else:
+                        break
+                if continue_check == 'x':
+                    break
+    finally:
+        conn.close
+question_outputs()
