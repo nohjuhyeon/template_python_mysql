@@ -5,10 +5,8 @@
 ```
 - 할 일
     - 문제와 관련된 정보(문제, 답항, 점수, 정답)을 DB에 저장
-
-- 파일명
-    - [question_settings.py](docs/question_setting.py)
 ``` 
+
 ### 시험 응시 : 유진
 ```
 - 할 일 
@@ -16,19 +14,16 @@
     - 사용자의 답 입력
     - 사용자 정보와 사용자가 입력한 답 DB에 저장
     - 사용자가 입력한 답안지 리스트 출력
-
-- 파일명
-    - question_outputs.py
 ```
+
 ### 응시자별 채점 결과 : 주현
 ```
 - 할 일 
     - 응시자별 채점 결과 출력
     - 과목 평균 점수 출력
-
-- 파일명
-    - user_scoring.py
 ```
+<br>
+
 ## 동작 순서도
 ### 1. 문제 입력
     1. 만들 문제 수와 문항 수를 입력
@@ -62,6 +57,33 @@
     1. DB에서 응시자 이름과 응시자들의 문제별 점수 가져오기
     2. 응시자별 채점 결과 출력
     3. 전체 응시자의 평균 출력
+<br>
+
+<h2>파이썬 파일 개요</h2>
+<details open>
+<summary>상세 보기</summary>
+
+|구분| 파일 이름|설명|담당자|
+|--|--|--|--|
+|1|[question_setting.py](docs/question_setting.py)|문제 입력|노주현|
+|2| [question_outputs.py](docs/question_outputs.py)|시험 응시|김유진|
+|3| [question_ouuser_scoringtputs.py](docs/user_scoring.py) |응시자별 채점 결과|노주현|
+</details>
+<br>
+<h2>데이터 예시</h2>
+</details>
+<details open>
+<summary>상세 보기</summary>
+
+|구분|테이블 이름|링크|구성 컬럼|
+|--|--|--|--|
+|1|QUESTION_TABLE|[QUESTION_TABLE](docs/functions/TOY_ERDs_QUESTION_TABLE.csv)|QUESTION_ID, QUESTION|
+|2|SCORE_TABLE|[SCORE_TABLE](docs/functions/TOY_ERDs_SCORE_TABLE.csv)|SCORE_ID, SCORE|
+|3|CHOICE_ANSWER_TABLE|[CHOICE_ANSWER_TABLE](docs/functions/TOY_ERDs_CHOICE_ANSWER_TABLE.csv)|CHOICE_ID, QUESTION_ID, SCORE_ID, CHOICE, CHOICE_NUMBER|
+|4|USER_INFO_TABLE|[USER_INFO_TABLE](docs/functions/TOY_ERDs_USER_INFO_TABLE.csv)|USER_ID, USER_NAME|
+|5|USER_ANSWER_TABLE|[USER_ANSWER_TABLE](docs/functions/TOY_ERDs_USER_ANSWER_TABLE.csv)|USER_ANSWER_ID, USER_ID, CHOICE_ID|
+</details>
+
 
 ## 프로젝트 결과
 - ERD 다이어그램
