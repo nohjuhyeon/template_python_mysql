@@ -1,15 +1,12 @@
 # 문제 작성 및 응시 프로그램 만들기
 
 <h2>파이썬 파일 개요</h2>
-<details open>
-<summary>상세 보기</summary>
 
 |구분| 파일 이름|설명|담당자|
 |--|--|--|--|
 |1|[question_setting.py](docs/question_setting.py)|문제 입력|노주현|
 |2| [question_outputs.py](docs/question_outputs.py)|시험 응시|김유진|
 |3| [question_ouuser_scoringtputs.py](docs/user_scoring.py) |응시자별 채점 결과|노주현|
-</details>
 
 
 ## 역할분담
@@ -72,9 +69,6 @@
 
 <br>
 <h2>데이터 예시</h2>
-</details>
-<details open>
-<summary>상세 보기</summary>
 
 |구분|테이블 이름|링크|구성 컬럼|
 |--|--|--|--|
@@ -83,7 +77,6 @@
 |3|CHOICE_ANSWER_TABLE|[CHOICE_ANSWER_TABLE](docs/functions/TOY_ERDs_CHOICE_ANSWER_TABLE.csv)|CHOICE_ID, QUESTION_ID, SCORE_ID, CHOICE, CHOICE_NUMBER|
 |4|USER_INFO_TABLE|[USER_INFO_TABLE](docs/functions/TOY_ERDs_USER_INFO_TABLE.csv)|USER_ID, USER_NAME|
 |5|USER_ANSWER_TABLE|[USER_ANSWER_TABLE](docs/functions/TOY_ERDs_USER_ANSWER_TABLE.csv)|USER_ANSWER_ID, USER_ID, CHOICE_ID|
-</details>
 
 
 ## 프로젝트 결과
