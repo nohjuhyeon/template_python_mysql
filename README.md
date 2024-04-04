@@ -95,18 +95,21 @@
 
 <br>
 
-## python_mysql
-#### Main package
-- java:17
-- mysql:8
+## 기본 세팅 정보
+### docker 세팅하기
+DOCKER FILE : [DOCKER FILE](dockers/)
 
-#### CLI with Dockerfile and compose.xml : duration 150.4s
+### DOCKER 설치 코드
 ```
 # --project-name is docker container name
-~$ docker-compose --project-name python_mysql up -d --build
+Docker installation command copied
+~$ docker-compose --project-name python__mysql up -d --build
+Docker reinstallation command copied
+~$ docker-compose --project-name python__mysql build --no-cache
+~$ docker-compose --project-name python__mysql up -d
 ```
 
-#### database infors
+#### DATABASE 정보
 + user='cocolabhub',
 + password='cocolabhub',
 + db='python_mysql'
