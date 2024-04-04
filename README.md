@@ -2,12 +2,12 @@
 
 <h2>파이썬 파일 개요</h2>
 
-|구분| 파일 이름|설명|담당자|
-|--|--|--|--|
-|0|[questionnaires_main.py](docs/questionnaires_main.py)|메인 ||
-|1|[question_setting.py](docs/question_setting.py)|문제 입력|노주현|
-|2| [question_outputs.py](docs/question_outputs.py)|시험 응시|김유진|
-|3| [question_ouuser_scoringtputs.py](docs/user_scoring.py) |응시자별 채점 결과|노주현|
+|구분|파일 이름|설명|담당자|링크|
+|--|--|--|--|--|
+|0|questionnaires_main|메인|-|[questionnaires_main.py](docs/questionnaires_main.py)|
+|1|question_setting|문제 입력|노주현|[question_setting.py](docs/question_setting.py)|
+|2|question_outputs|시험 응시|김유진| [question_outputs.py](docs/question_outputs.py)|
+|3|user_scoring|응시자별 채점 결과|노주현| [question_ouuser_scoringtputs.py](docs/user_scoring.py) |
 
 <br>
 
