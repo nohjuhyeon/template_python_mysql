@@ -17,7 +17,7 @@ try:
         conn.commit()
 
         # Read
-        sql = "SELECT * FROM TableName"
+        sql = "SELECT * FROM TableName WHERE "
         cursor.execute(sql)
         data = cursor.fetchall()
         for row in data:

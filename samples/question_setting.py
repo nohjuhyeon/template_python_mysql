@@ -42,23 +42,18 @@ try:
             for j in range(len(score_data)):
                 score_list.append(int(score_data[j][1]))
                 score_id_list.append(score_data[j][0])
-
-            # question list 만들기
-            sql = "SELECT * FROM QUESTION_TABLE"
-            cursor.execute(sql)
-            question_data = cursor.fetchall()
-            question_list = []
-            for j in range(len(question_data)):
-                question_list.append(question_data[j][1])
             
             # question table에 값 추가하기
             while True:
                 question = input("문항 {} : ".format(i+1))
-                if question not in question_list:
+                sql = "SELECT * FROM QUESTION_TABLE WHERE QUESTION = %s"
+                cursor.execute(sql, (question))
+                data = cursor.fetchall()
+                if len(data) == 0:
                     break
                 else:
                     # question list내에 입력한 값이 있을 경우 다시 입력
-                    print("중복 문제가 있습니다.")
+                    print("*** 중복 문제가 있습니다. ***")
 
             # question_table에 추가
             question_id = "QUESTION_ID_{}".format(i+1)
@@ -76,7 +71,7 @@ try:
                         choice_list.append(choice_element)
                         break
                     else:
-                        print("중복 문항이 있습니다.") 
+                        print("*** 중복 문항이 있습니다. ***") 
 
             # 정답 입력
             answer = int(input("정답 : "))
@@ -110,6 +105,6 @@ try:
                 sql = "INSERT INTO CHOICE_ANSWER_TABLE(CHOICE_ID,QUESTEION_ID,SCORE_ID,CHOICE, CHOICE_NUMBER) VALUES (%s,%s,%s,%s,%s)"
                 cursor.execute(sql, (choice_id,question_id,score_id, choice_list[j], j+1))
                 conn.commit()
-
+            print("--------------------------------")
 finally:
     conn.close()
