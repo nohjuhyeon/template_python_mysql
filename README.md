@@ -69,6 +69,17 @@
     3. 전체 응시자의 평균 출력
 
 <br>
+
+## 프로젝트 결과
+- ERD 다이어그램
+![TOY_ERDs_diagram](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/89dec672-c1a5-47a6-a56c-618a9b0c16ce)
+- DB 구성
+![TOY_DATABASE구성_YJH](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/5069d6c9-e9f7-43b6-b000-405e1ecff69f)
+
+- 프로그램 동작 영상 : https://www.youtube.com/watch?v=QAIcF4GyOG4
+
+<br>
+
 <h2>데이터 예시</h2>
 
 |구분|테이블 이름|링크|구성 컬럼|
@@ -79,15 +90,6 @@
 |4|USER_INFO_TABLE|[USER_INFO_TABLE](docs/functions/TOY_ERDs_USER_INFO_TABLE.csv)|USER_ID, USER_NAME|
 |5|USER_ANSWER_TABLE|[USER_ANSWER_TABLE](docs/functions/TOY_ERDs_USER_ANSWER_TABLE.csv)|USER_ANSWER_ID, USER_ID, CHOICE_ID|
 
-<br>
-
-## 프로젝트 결과
-- ERD 다이어그램
-![TOY_ERDs_diagram](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/89dec672-c1a5-47a6-a56c-618a9b0c16ce)
-- DB 구성
-![TOY_DATABASE구성_YJH](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/5069d6c9-e9f7-43b6-b000-405e1ecff69f)
-
-- 프로그램 동작 영상 : https://www.youtube.com/watch?v=QAIcF4GyOG4
 
 <br>
 
