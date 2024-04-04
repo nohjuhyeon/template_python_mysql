@@ -104,8 +104,6 @@
 # --project-name is docker container name
 ~$ docker-compose --project-name python_mysql up -d --build
 ```
-#### samples
-- [samples/python_mysql.py](./samples/python_mysql.py)
 
 #### database infors
 + user='cocolabhub',
