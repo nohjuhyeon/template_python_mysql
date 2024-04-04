@@ -37,12 +37,9 @@ try:
             sql = "SELECT * FROM SCORE_TABLE"
             cursor.execute(sql)
             score_data = cursor.fetchall()
-            score_list = []
-            score_id_list = []
+            score_dict = {}
             for j in range(len(score_data)):
-                score_list.append(int(score_data[j][1]))
-                score_id_list.append(score_data[j][0])
-            
+                score_dict[score_data[j][0]] = int(score_data[j][1])       
             # question table에 값 추가하기
             while True:
                 question = input("문항 {} : ".format(i+1))
@@ -74,21 +71,33 @@ try:
                         print("*** 중복 문항이 있습니다. ***") 
 
             # 정답 입력
-            answer = int(input("정답 : "))
-
+            while True:
+                try:
+                    answer = int(input("정답 : "))
+                    if answer <= choice_count:
+                        break
+                    else:
+                        print("*** 숫자 {} 이하로 입력해주세요. ***".format(choice_count))
+                except:
+                    print("*** 숫자만 입력해주세요 ***")
             # score 입력
-            score = int(input("점수 : "))
+            while True:
+                try:
+                    score = int(input("점수 : "))
+                    break
+                except:
+                    print("*** 숫자만 입력해주세요 ***")
             
             # score_list에 score 값이 없을 경우 score_table에 값 추가하기
-            if score not in score_list:
+            if score not in (list(score_dict.values())):
                 sql = "INSERT INTO SCORE_TABLE(SCORE_ID,SCORE) VALUES (%s, %s)"
-                cursor.execute(sql, ("SCORE_ID_{}".format(len(score_list)), score))
+                cursor.execute(sql, ("SCORE_ID_{}".format(len(score_dict.values())), score))
                 conn.commit()
-                camp_score_id = "SCORE_ID_{}".format(len(score_list))
+                camp_score_id = "SCORE_ID_{}".format(len(score_dict.values()))
             else:
-                for j in range(len(score_list)):
-                    if score == score_list[j]:
-                        camp_score_id = score_id_list[j]
+                for j in range(len(score_dict.values())):
+                    if score == list(score_dict.values())[j]:
+                        camp_score_id = list(score_dict.keys())[j]
 
             for j in range(len(choice_list)):
                 # choice의 고유값 choice_id 설정
@@ -106,5 +115,6 @@ try:
                 cursor.execute(sql, (choice_id,question_id,score_id, choice_list[j], j+1))
                 conn.commit()
             print("--------------------------------")
+        print(" ******** 문제 입력이 끝났습니다! ********")
 finally:
     conn.close()
