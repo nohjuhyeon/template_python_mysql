@@ -7,7 +7,7 @@
     - 문제와 관련된 정보(문제, 답항, 점수, 정답)을 DB에 저장
 
 - 파일명
-    - question_settings.py
+    - [question_settings.py](docs/question_setting.py)
 ``` 
 ### 시험 응시 : 유진
 ```
