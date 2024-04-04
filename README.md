@@ -52,9 +52,12 @@
     3. 전체 응시자의 평균 출력
 
 ## 프로젝트 결과
-- ERD 다이어그램  :
-- DB 
-- [프로그램 동작 영상](https://www.youtube.com/watch?v=QAIcF4GyOG4 )
+- ERD 다이어그램
+![TOY_ERDs_diagram](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/89dec672-c1a5-47a6-a56c-618a9b0c16ce)
+- DB 구성
+![TOY_DATABASE구성_YJH](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/5069d6c9-e9f7-43b6-b000-405e1ecff69f)
+
+- 프로그램 동작 영상 : https://www.youtube.com/watch?v=QAIcF4GyOG4
 
 
 ## python_mysql
