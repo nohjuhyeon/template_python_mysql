@@ -80,6 +80,7 @@
 |5|USER_ANSWER_TABLE|[USER_ANSWER_TABLE](docs/functions/TOY_ERDs_USER_ANSWER_TABLE.csv)|USER_ANSWER_ID, USER_ID, CHOICE_ID|
 
 <br>
+
 ## 프로젝트 결과
 - ERD 다이어그램
 ![TOY_ERDs_diagram](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/89dec672-c1a5-47a6-a56c-618a9b0c16ce)
