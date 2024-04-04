@@ -1,4 +1,3 @@
-
 # 데이터베이스 연결 설정
 
 def question_outputs():
@@ -61,7 +60,7 @@ def question_outputs():
                     cursor.execute(sql)
                     user_answer_data = cursor.fetchall()
                     user_answer_id = "USER_ANSWER_ID_{}".format(len(user_answer_data)+1)
-                    # 2-5 :  응시자가 입력한 답 user_answer_table에 저장
+                    # 2-5 : 응시자가 입력한 답 user_answer_table에 저장
                     sql = "INSERT INTO USER_ANSWER_TABLE (USER_ANSWER_ID, USER_ID,CHOICE_ID) VALUES (%s, %s, %s)"
                     cursor.execute(sql, (user_answer_id, user_id,user_choice_id))
                     conn.commit()

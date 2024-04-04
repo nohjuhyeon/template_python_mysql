@@ -1,5 +1,3 @@
-
-
 # 데이터베이스 연결 설정
 
 def question_settings():
