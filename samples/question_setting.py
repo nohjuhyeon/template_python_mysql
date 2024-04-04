@@ -30,7 +30,7 @@ try:
         # 문제 수와 문항 수 입력
         question_count = int(input("문항 수를 입력하세요 : "))
         choice_count = int(input("문제 유형을 입력하세요 : "))
-
+        print("--------------------------------")
         # Create
         for i in range(question_count):
             # score list와 score_id list 만들기
@@ -77,16 +77,16 @@ try:
                     if answer <= choice_count:
                         break
                     else:
-                        print("*** 숫자 {} 이하로 입력해주세요. ***".format(choice_count))
+                        print("*** 숫자 {} 이하로 입력해주세요! ***".format(choice_count))
                 except:
-                    print("*** 숫자만 입력해주세요 ***")
+                    print("*** 숫자만 입력해주세요! ***")
             # score 입력
             while True:
                 try:
                     score = int(input("점수 : "))
                     break
                 except:
-                    print("*** 숫자만 입력해주세요 ***")
+                    print("*** 숫자만 입력해주세요! ***")
             
             # score_list에 score 값이 없을 경우 score_table에 값 추가하기
             if score not in (list(score_dict.values())):
