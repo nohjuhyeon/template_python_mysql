@@ -1,5 +1,17 @@
 # 문제 작성 및 응시 프로그램 만들기
 
+<h2>파이썬 파일 개요</h2>
+<details open>
+<summary>상세 보기</summary>
+
+|구분| 파일 이름|설명|담당자|
+|--|--|--|--|
+|1|[question_setting.py](docs/question_setting.py)|문제 입력|노주현|
+|2| [question_outputs.py](docs/question_outputs.py)|시험 응시|김유진|
+|3| [question_ouuser_scoringtputs.py](docs/user_scoring.py) |응시자별 채점 결과|노주현|
+</details>
+
+
 ## 역할분담
 ###  문제 입력 : 주현
 ```
@@ -57,18 +69,7 @@
     1. DB에서 응시자 이름과 응시자들의 문제별 점수 가져오기
     2. 응시자별 채점 결과 출력
     3. 전체 응시자의 평균 출력
-<br>
 
-<h2>파이썬 파일 개요</h2>
-<details open>
-<summary>상세 보기</summary>
-
-|구분| 파일 이름|설명|담당자|
-|--|--|--|--|
-|1|[question_setting.py](docs/question_setting.py)|문제 입력|노주현|
-|2| [question_outputs.py](docs/question_outputs.py)|시험 응시|김유진|
-|3| [question_ouuser_scoringtputs.py](docs/user_scoring.py) |응시자별 채점 결과|노주현|
-</details>
 <br>
 <h2>데이터 예시</h2>
 </details>
