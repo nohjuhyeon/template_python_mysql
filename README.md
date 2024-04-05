@@ -43,7 +43,7 @@
 - 답항별로 점수를 지정
 - 오답일 경우 0점, 정답일 경우 해당 문제의 점수를 부여
 
-![image](https://github.com/nohjuhyeon/toy_ERDs/assets/151099184/fd569258-9f66-40bc-bdf7-fd8d7da9740a)
+![image](https://github.com/nohjuhyeon/toy_ERDs/assets/151099184/b4dce6f7-78e4-410c-b26b-f64e64d73cc2)
 
 <br>
 
@@ -103,8 +103,13 @@
 |4|USER_INFO_TABLE|USER_ID, USER_NAME|[USER_INFO_TABLE](DATABASE/TOY_ERDs_USER_INFO_TABLE.csv)|
 |5|USER_ANSWER_TABLE|USER_ANSWER_ID, USER_ID, CHOICE_ID|[USER_ANSWER_TABLE](DATABASE/TOY_ERDs_USER_ANSWER_TABLE.csv)|
 
-
 <br>
+
+## 느낀점
+```
+MONGO와 달리 RDB에서는 TABLE간의 동일한 컬럼이 있을 경우, 연결성을 부여할 수 있다.
+이 연결성을 활용하여 데이터 베이스를 좀 더 편리하게 사용할 수 있었다. 
+```
 
 ## 기본 세팅 정보
 ### docker 세팅하기
