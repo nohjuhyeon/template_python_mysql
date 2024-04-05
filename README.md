@@ -45,6 +45,9 @@
 
 ![image](https://github.com/nohjuhyeon/toy_ERDs/assets/151099184/b4dce6f7-78e4-410c-b26b-f64e64d73cc2)
 
+### ERD 다이어그램
+![TOY_ERDs_diagram](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/89dec672-c1a5-47a6-a56c-618a9b0c16ce)
+
 <br>
 
 ## 동작 순서도
@@ -84,17 +87,25 @@
 <br>
 
 ## 프로젝트 결과
-### ERD 다이어그램
-![TOY_ERDs_diagram](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/89dec672-c1a5-47a6-a56c-618a9b0c16ce)
-### 예상 DB 구성도 
-![TOY_DATABASE구성_YJH](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/5069d6c9-e9f7-43b6-b000-405e1ecff69f)
+
+### 느낀점
+```
+MONGO와 달리 RDB에서는 TABLE간의 동일한 컬럼이 있을 경우, 연결성을 부여할 수 있다.
+이 연결성을 활용하여 데이터 베이스를 좀 더 편리하게 사용할 수 있었다. 
+```
+### 프로젝트 진행 중 Episode
+
 
 ### 프로그램 동작 영상 : https://www.youtube.com/watch?v=QAIcF4GyOG4
 
 <br>
 
-<h2>데이터 베이스 구성 예시 파일</h2>
+## 데이터 베이스 구성 예시
 
+### 예상 DB 구성도 
+![TOY_DATABASE구성_YJH](https://github.com/nohjuhyeon/toy_ERDs/assets/151099474/5069d6c9-e9f7-43b6-b000-405e1ecff69f)
+
+## 예상 DB 구성 파일
 |구분|테이블 이름|구성 컬럼|링크|
 |--|--|--|--|
 |1|QUESTION_TABLE|QUESTION_ID, QUESTION|[QUESTION_TABLE](DATABASE/TOY_ERDs_QUESTION_TABLE.csv)|
@@ -104,12 +115,6 @@
 |5|USER_ANSWER_TABLE|USER_ANSWER_ID, USER_ID, CHOICE_ID|[USER_ANSWER_TABLE](DATABASE/TOY_ERDs_USER_ANSWER_TABLE.csv)|
 
 <br>
-
-## 느낀점
-```
-MONGO와 달리 RDB에서는 TABLE간의 동일한 컬럼이 있을 경우, 연결성을 부여할 수 있다.
-이 연결성을 활용하여 데이터 베이스를 좀 더 편리하게 사용할 수 있었다. 
-```
 
 ## 기본 세팅 정보
 ### docker 세팅하기
