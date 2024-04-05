@@ -30,15 +30,12 @@ def question_outputs():
                 for i in range(len(question_data)):
                     # 2-3 : 문제와 문제에 해당하는 문항들을 DB에서 가져와서 출력
                     print("문제 {} : {}".format(i+1,question_data[i][1]))  # 각 행 출력
-                    sql = "SELECT * FROM CHOICE_ANSWER_TABLE WHERE QUESTION_ID = %s"
+                    sql = "SELECT * FROM CHOICE_ANSWER_TABLE WHERE QUESTION_ID = %s ORDER BY CHOICE_NUMBER ASC"
                     cursor.execute(sql,question_data[i][0])
                     choice_data = cursor.fetchall()
-                    choice_dict = {}
-                    for j in range(len(choice_data)):
-                        choice_dict[choice_data[j][4]] = choice_data[j][3]
 
-                    for j in range(len(choice_dict)):
-                        print("{}. {}".format(j+1,choice_dict[str(j+1)]))
+                    for j in range(len(choice_data)):
+                        print("{}. {}".format(choice_data[j][4],choice_data[j][3]))
                     # 2-4 : 응시자가 답 입력
                     while True:
                         ## 만약에 답이 숫자가 아니거나 문항 수보다 클 경우 다시 입력
@@ -82,4 +79,3 @@ def question_outputs():
                     break
     finally:
         conn.close
-question_outputs()
