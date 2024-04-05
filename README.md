@@ -94,7 +94,11 @@ MONGO와 달리 RDB에서는 TABLE간의 동일한 컬럼이 있을 경우, 연�
 이 연결성을 활용하여 데이터 베이스를 좀 더 편리하게 사용할 수 있었다. 
 ```
 ### 프로젝트 진행 중 Episode
-
+![image](https://github.com/nohjuhyeon/toy_ERDs/assets/151099184/1ccb896d-a328-4512-a2d8-4896b3e01bb1)
+```
+choice_id가 9보다 10이 더 우선적으로 배치되어  문제를 출력할 때 3번 문항의 순서가 2-3-4-1로 나옴
+➜ order by를 통해 choice_number 순으로 정렬될 수 있도록 설정
+```
 
 ### 프로그램 동작 영상 : https://www.youtube.com/watch?v=QAIcF4GyOG4
 
