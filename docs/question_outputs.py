@@ -22,20 +22,20 @@ def question_outputs():
                 sql = "INSERT INTO USER_INFO_TABLE (USER_ID,USER_NAME) VALUES (%s, %s)"
                 cursor.execute(sql, (user_id,user_name))
                 conn.commit()
-                sql = "SELECT * FROM QUESTION_TABLE"
-                cursor.execute(sql)
+                sql = "SELECT * FROM QUESTION_ANSWER_TABLE WHERE QNA_PK_ID LIKE %s;"
+                cursor.execute(sql,('Q_%'))
                 question_data = cursor.fetchall()
 
                 user_pick_list = []
                 for i in range(len(question_data)):
                     # 2-3 : 문제와 문제에 해당하는 문항들을 DB에서 가져와서 출력
                     print("문제 {} : {}".format(i+1,question_data[i][1]))  # 각 행 출력
-                    sql = "SELECT * FROM CHOICE_ANSWER_TABLE WHERE QUESTION_ID = %s ORDER BY CHOICE_NUMBER ASC"
-                    cursor.execute(sql,question_data[i][0])
+                    sql = "SELECT * FROM QUESTION_ANSWER_TABLE WHERE QNA_FK_ID = %s ORDER BY CHOICE_NUMBER;"
+                    cursor.execute(sql,(question_data[i][0]))
                     choice_data = cursor.fetchall()
 
                     for j in range(len(choice_data)):
-                        print("{}. {}".format(choice_data[j][4],choice_data[j][3]))
+                        print("{}. {}".format(choice_data[j][2],choice_data[j][1]))
                     # 2-4 : 응시자가 답 입력
                     while True:
                         ## 만약에 답이 숫자가 아니거나 문항 수보다 클 경우 다시 입력
@@ -49,16 +49,16 @@ def question_outputs():
                             print("*** 숫자만 입력해주세요! ***")
 
                     user_pick_list.append(user_pick)
-                    sql = "SELECT * FROM CHOICE_ANSWER_TABLE WHERE QUESTION_ID = %s AND CHOICE_NUMBER = %s"
+                    sql = "SELECT * FROM QUESTION_ANSWER_TABLE WHERE QNA_FK_ID = %s AND CHOICE_NUMBER = %s;"
                     cursor.execute(sql,(question_data[i][0],user_pick))
                     user_pick_data = cursor.fetchall()
                     user_choice_id = user_pick_data[0][0]
-                    sql = "SELECT USER_ID FROM USER_ANSWER_TABLE"
+                    sql = "SELECT USER_ANSWER_ID FROM USER_ANSWER_TABLE"
                     cursor.execute(sql)
                     user_answer_data = cursor.fetchall()
                     user_answer_id = "USER_ANSWER_ID_{}".format(len(user_answer_data)+1)
                     # 2-5 : 응시자가 입력한 답 user_answer_table에 저장
-                    sql = "INSERT INTO USER_ANSWER_TABLE (USER_ANSWER_ID, USER_ID,CHOICE_ID) VALUES (%s, %s, %s)"
+                    sql = "INSERT INTO USER_ANSWER_TABLE (USER_ANSWER_ID, USER_ID,QNA_FK_ID) VALUES (%s, %s, %s)"
                     cursor.execute(sql, (user_answer_id, user_id,user_choice_id))
                     conn.commit()
                     print("----------------------------")
