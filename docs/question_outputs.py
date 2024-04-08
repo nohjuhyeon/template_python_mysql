@@ -1,6 +1,6 @@
 # 데이터베이스 연결 설정
 
-def question_settings():
+def question_outputs():
     import pymysql
     conn = pymysql.connect(
     host='python_mysql_mysql',  # 컨테이너 이름 또는 IP
@@ -11,125 +11,71 @@ def question_settings():
     )
     try:
         with conn.cursor() as cursor:
-            # Delete
-            sql = "DELETE FROM USER_ANSWER_TABLE"
-            cursor.execute(sql)
-            conn.commit()
-            sql = "DELETE FROM QUESTION_ANSWER_TABLE"
-            cursor.execute(sql)
-            conn.commit()
-            sql = "DELETE FROM SCORE_TABLE"
-            cursor.execute(sql)
-            conn.commit()
-            sql = "DELETE FROM USER_INFO_TABLE"
-            cursor.execute(sql)
-            conn.commit()
-            ## 주제에 대한 ID QUESTION_ANSWER_TABLE 넣기
-            sql = "INSERT INTO SCORE_TABLE(SCORE_ID,SCORE) VALUES (%s, %s)"
-            cursor.execute(sql, ("SCORE_ID_0", 0))
-            conn.commit()
-            sql = "SELECT QNA_PK_ID FROM QUESTION_ANSWER_TABLE WHERE QNA_PK_ID LIKE 'S_%';"
-            cursor.execute(sql)
-            subject_data = cursor.fetchall()
-            subject_id = "S_{}".format(len(subject_data)+1)
-            exam_number = "{}번째 시험".format(len(subject_data)+1)
-            sql = "INSERT INTO QUESTION_ANSWER_TABLE(QNA_PK_ID,QNA_INFO,CHOICE_NUMBER,SCORE_ID,QNA_FK_ID) VALUES (%s, %s, %s, %s, %s)"
-            cursor.execute(sql, (subject_id,exam_number,"", "SCORE_ID_0","" ))
-            conn.commit()
-
-            # 1-1 문제 수와 문항 수 입력
-            question_count = int(input("문항 수를 입력하세요 : "))
-            choice_count = int(input("문제 유형을 입력하세요 : "))
-            print("--------------------------------")
-            # Create
-            for i in range(question_count):
-                ## score list와 score_id list 만들기
-                sql = "SELECT * FROM SCORE_TABLE"
+            while True:
+                sql = "SELECT USER_ID FROM USER_INFO_TABLE"
                 cursor.execute(sql)
-                score_data = cursor.fetchall()
-                score_dict = {}
-                for j in range(len(score_data)):
-                    score_dict[score_data[j][0]] = int(score_data[j][1])       
-                # 1-2 : 문제 입력
-                while True:
-                    question = input("문항 {} : ".format(i+1))
-                    sql = "SELECT * FROM QUESTION_ANSWER_TABLE WHERE QNA_PK_ID LIKE %s AND QNA_INFO = %s;"
-                    cursor.execute(sql,('Q_%', question))
-                    question_data = cursor.fetchall()
-                    if len(question_data) == 0:
-                        break
-                    else:
-                        ## question list내에 입력한 값이 있을 경우 다시 입력
-                        print("*** 중복 문제가 있습니다. ***")
-
-
-                # 1-4 : 문항들을 입력 받아 리스트 작성
-                choice_list = []
-                for j in range(choice_count):
-                    while True:
-                        ## 답항 리스트에 중복값이 있을 경우 다시 입력
-                        choice_element = input("선택지 {} : ".format(j+1))
-                        if choice_element not in choice_list:
-                            choice_list.append(choice_element)
-                            break
-                        else:
-                            print("*** 중복 문항이 있습니다. ***") 
-
-                # 1-5 : 정답 입력
-                while True:
-                    try:
-                        answer = int(input("정답 : "))
-                        if 1 <= answer <= choice_count:
-                            break
-                        else:
-                            print("*** 숫자 {} 이하로 입력해주세요! ***".format(choice_count))
-                    except:
-                        print("*** 숫자만 입력해주세요! ***")
-                # 1-6 : 점수 입력
-                while True:
-                    try:
-                        score = int(input("점수 : "))
-                        if score >= 1:
-                            break
-                    except:
-                        print("*** 숫자만 입력해주세요! ***")
-                
-                ## score_list에 score 값이 없을 경우 score_table에 값 추가하기
-                if score not in (list(score_dict.values())):
-                    sql = "INSERT INTO SCORE_TABLE(SCORE_ID,SCORE) VALUES (%s, %s)"
-                    cursor.execute(sql, ("SCORE_ID_{}".format(len(score_dict.values())), score))
-                    conn.commit()
-                    question_score_id = "SCORE_ID_{}".format(len(score_dict.values()))
-                else:
-                    for j in range(len(score_dict.values())):
-                        if score == list(score_dict.values())[j]:
-                            question_score_id = list(score_dict.keys())[j]
-
-                # 1-3 : 입력 받은 문제와 해당 문제의 question_id를 QUESTION_ANSWER_TABLE 저장
-                question_id = "Q_{}".format(i+1)
-                sql = "INSERT INTO QUESTION_ANSWER_TABLE(QNA_PK_ID,QNA_INFO,CHOICE_NUMBER,SCORE_ID,QNA_FK_ID) VALUES (%s, %s, %s, %s, %s)"
-                cursor.execute(sql, (question_id,question,answer, question_score_id,subject_id ))
+                user_data = cursor.fetchall()
+                # 2-1 : 응시자 이름 입력
+                user_name = input("응시자 이름 : ")
+                # 2-2 : 응시자 이름과 id user_info_table에 저장
+                user_id = "USER_ID_{}".format(len(user_data)+1)
+                sql = "INSERT INTO USER_INFO_TABLE (USER_ID,USER_NAME) VALUES (%s, %s)"
+                cursor.execute(sql, (user_id,user_name))
                 conn.commit()
+                sql = "SELECT * FROM QUESTION_ANSWER_TABLE WHERE QNA_PK_ID LIKE %s;"
+                cursor.execute(sql,('Q_%'))
+                question_data = cursor.fetchall()
 
-                for j in range(len(choice_list)):
-                    ## choice의 고유값 choice_id 설정
-                    choice_id = "C_{}".format(i*choice_count + j+1)
+                user_pick_list = []
+                for i in range(len(question_data)):
+                    # 2-3 : 문제와 문제에 해당하는 문항들을 DB에서 가져와서 출력
+                    print("문제 {} : {}".format(i+1,question_data[i][1]))  # 각 행 출력
+                    sql = "SELECT * FROM QUESTION_ANSWER_TABLE WHERE QNA_FK_ID = %s ORDER BY CHOICE_NUMBER;"
+                    cursor.execute(sql,(question_data[i][0]))
+                    choice_data = cursor.fetchall()
 
-                    ## 정답과 보기의 번호가 다를 경우 score_id = 'score_id_0'
-                    if j+1 != answer:
-                        score_id = "SCORE_ID_0"
-                    ## 정답과 보기가 같을 경우 score_id = camp_score_id
-                    else:
-                        score_id = question_score_id
-                    
-                    # 1-3 : 입력 받은 문제와 해당 문제의 question_id를 QUESTION_ANSWER_TABLE 저장
-                    sql = "INSERT INTO QUESTION_ANSWER_TABLE(QNA_PK_ID,QNA_INFO,CHOICE_NUMBER,SCORE_ID,QNA_FK_ID) VALUES (%s,%s,%s,%s,%s)"
-                    cursor.execute(sql, (choice_id,choice_list[j],j+1,score_id,question_id))
+                    for j in range(len(choice_data)):
+                        print("{}. {}".format(choice_data[j][2],choice_data[j][1]))
+                    # 2-4 : 응시자가 답 입력
+                    while True:
+                        ## 만약에 답이 숫자가 아니거나 문항 수보다 클 경우 다시 입력
+                        try:
+                            user_pick = int(input("답 : "))
+                            if 1 <=user_pick <= len(choice_data):
+                                break
+                            else:
+                                print("*** 숫자 {} 이하로 입력해주세요! ***".format(len(choice_data)))
+                        except:
+                            print("*** 숫자만 입력해주세요! ***")
+
+                    user_pick_list.append(user_pick)
+                    sql = "SELECT * FROM QUESTION_ANSWER_TABLE WHERE QNA_FK_ID = %s AND CHOICE_NUMBER = %s;"
+                    cursor.execute(sql,(question_data[i][0],user_pick))
+                    user_pick_data = cursor.fetchall()
+                    user_choice_id = user_pick_data[0][0]
+                    sql = "SELECT USER_ANSWER_ID FROM USER_ANSWER_TABLE"
+                    cursor.execute(sql)
+                    user_answer_data = cursor.fetchall()
+                    user_answer_id = "USER_ANSWER_ID_{}".format(len(user_answer_data)+1)
+                    # 2-5 : 응시자가 입력한 답 user_answer_table에 저장
+                    sql = "INSERT INTO USER_ANSWER_TABLE (USER_ANSWER_ID, USER_ID,QNA_FK_ID) VALUES (%s, %s, %s)"
+                    cursor.execute(sql, (user_answer_id, user_id,user_choice_id))
                     conn.commit()
-                print("--------------------------------")
-            # 1-8 : 만들 문제 수를 충족시켰을 경우 종료
-            print(" ******** 문제 입력이 끝났습니다! ********")
+                    print("----------------------------")
+                print("***** 시험이 종료되었습니다! *****")
+                # 2-6 : 모든 문제를 풀었을 경우, 응시자가 입력한 답안지 출력
+                print("{} 님이 푼 답안지".format(user_name))
+                for i in range(len(user_pick_list)):
+                    print("{}번 문제 답 : {}".format(i+1, user_pick_list[i]))
+                # 2-7 : 다음 응시자가 있는지 확인
+                while True:
+                    continue_check = input("다음 응시자가 있나요? (계속 : c, 종료 : x) : ").lower()
+                    if continue_check not in ['c','x']:
+                        print('*** "c"나 "x"를 입력해주세요! ***')
+                        pass
+                    else:
+                        break
+                if continue_check == 'x':
+                    break
     finally:
-        conn.close()
-
-
+        conn.close
