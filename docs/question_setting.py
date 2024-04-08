@@ -79,7 +79,7 @@ def question_settings():
                 while True:
                     try:
                         answer = int(input("정답 : "))
-                        if answer <= choice_count:
+                        if 1 <= answer <= choice_count:
                             break
                         else:
                             print("*** 숫자 {} 이하로 입력해주세요! ***".format(choice_count))
@@ -89,7 +89,8 @@ def question_settings():
                 while True:
                     try:
                         score = int(input("점수 : "))
-                        break
+                        if score >= 1:
+                            break
                     except:
                         print("*** 숫자만 입력해주세요! ***")
                 

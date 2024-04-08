@@ -41,7 +41,7 @@ def question_outputs():
                         ## 만약에 답이 숫자가 아니거나 문항 수보다 클 경우 다시 입력
                         try:
                             user_pick = int(input("답 : "))
-                            if user_pick <= len(choice_data):
+                            if 1 <=user_pick <= len(choice_data):
                                 break
                             else:
                                 print("*** 숫자 {} 이하로 입력해주세요! ***".format(len(choice_data)))
